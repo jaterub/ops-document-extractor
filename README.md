@@ -71,4 +71,42 @@ flowchart LR
 - Cost per document.
 
 ## Run locally
-_To be completed when built._
+### Day 1 dataset
+
+The initial labelled dataset contains six deterministic synthetic documents: four invoices and two contracts. One invoice deliberately contains inconsistent tax and total amounts to exercise later validation. Synthetic PDFs are generated locally and are not committed as binary artifacts.
+
+Generate the PDFs:
+
+```powershell
+python -m scripts.generate_documents
+```
+
+The labels and expected issues are stored in `data/ground_truth.jsonl`. No real company or personal data is used. Public-document examples have not yet been added; this remains an explicit dataset expansion item.
+
+## Run locally
+
+PowerShell (Windows):
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+Copy-Item .env.example .env
+python -m scripts.generate_documents
+uvicorn app.main:app --reload
+```
+
+In a second PowerShell window:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+pytest -q
+```
+
+API endpoints:
+- `GET /health` — service health.
+- `GET /documents` — labelled Day 1 dataset metadata.
+- Interactive API docs: `http://127.0.0.1:8000/docs`.
+
+AWS credentials and Bedrock access are not required on Day 1.
