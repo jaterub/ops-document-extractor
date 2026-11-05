@@ -36,7 +36,7 @@ flowchart LR
 | | pytest |
 | | Docker |
 | | GitHub Actions CI with quality gate |
-| | Cloud deploy: TBD (AWS Bedrock or Azure OpenAI) |
+| | Cloud deploy: AWS (Bedrock + AgentCore) |
 | **Deep dive** | Document extraction: OCR / Document Intelligence |
 | **Project-specific** | Structured outputs validated with Pydantic |
 | | Human review queue for low-confidence results |
